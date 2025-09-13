@@ -94,5 +94,25 @@ config.window_frame = {
 
 config.window_decorations = 'RESIZE'
 
+-- Mouse selection highlighting
+config.selection_foreground = 'none'  -- Keep original text color
+config.selection_background = '#44475a'  -- Dracula selection color (lighter gray)
+
+-- Enable mouse interactions
+config.mouse_bindings = {
+  -- Right click pastes from clipboard
+  {
+    event = {Up = {streak = 1, button = 'Right'}},
+    mods = 'NONE',
+    action = wezterm.action.PasteFrom 'Clipboard',
+  },
+  -- Ctrl-click opens hyperlinks
+  {
+    event = {Up = {streak = 1, button = 'Left'}},
+    mods = 'CTRL',
+    action = wezterm.action.OpenLinkAtMouseCursor,
+  },
+}
+
 -- Finally, return the configuration to wezterm:
 return config
