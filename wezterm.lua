@@ -94,9 +94,11 @@ config.window_frame = {
 
 config.window_decorations = 'RESIZE'
 
--- Mouse selection highlighting
-config.selection_foreground = 'none'  -- Keep original text color
-config.selection_background = '#44475a'  -- Dracula selection color (lighter gray)
+-- Mouse selection highlighting (set in colors table)
+config.colors = {
+  selection_fg = 'none',  -- Keep original text color
+  selection_bg = '#44475a',  -- Dracula selection color (lighter gray)
+}
 
 -- Enable mouse interactions
 config.mouse_bindings = {
@@ -111,6 +113,49 @@ config.mouse_bindings = {
     event = {Up = {streak = 1, button = 'Left'}},
     mods = 'CTRL',
     action = wezterm.action.OpenLinkAtMouseCursor,
+  },
+}
+
+-- Keyboard shortcuts
+config.keys = {
+  -- Split horizontally (one above, one below)
+  {
+    key = 'E',
+    mods = 'CTRL|SHIFT',
+    action = wezterm.action.SplitHorizontal { domain = 'CurrentPaneDomain' },
+  },
+  -- Split vertically (side by side)
+  {
+    key = 'D',
+    mods = 'CTRL|SHIFT',
+    action = wezterm.action.SplitVertical { domain = 'CurrentPaneDomain' },
+  },
+  -- Navigate between panes
+  {
+    key = 'LeftArrow',
+    mods = 'CTRL|SHIFT',
+    action = wezterm.action.ActivatePaneDirection 'Left',
+  },
+  {
+    key = 'RightArrow',
+    mods = 'CTRL|SHIFT',
+    action = wezterm.action.ActivatePaneDirection 'Right',
+  },
+  {
+    key = 'UpArrow',
+    mods = 'CTRL|SHIFT',
+    action = wezterm.action.ActivatePaneDirection 'Up',
+  },
+  {
+    key = 'DownArrow',
+    mods = 'CTRL|SHIFT',
+    action = wezterm.action.ActivatePaneDirection 'Down',
+  },
+  -- Close current pane
+  {
+    key = 'w',
+    mods = 'CTRL|SHIFT',
+    action = wezterm.action.CloseCurrentPane { confirm = true },
   },
 }
 
